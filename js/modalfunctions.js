@@ -254,12 +254,19 @@ $(function() {
 		 	
 		 	valueObject = $(value);
 		 	
+		 	//Check x en y positie, breedte en hoogte, normaliseer deze tussen 0 en 1
+            var position = valueObject.position();
+            piece.position_x = parseInt(valueObject.css("left")) / valueObject.parent().width();
+            piece.position_y = parseInt(valueObject.css("top")) / valueObject.parent().innerHeight();
+		 	
 		 	//check of het een image is of iFrame
 		 	if(valueObject.hasClass('youtube') || valueObject.hasClass('vimeo') || valueObject.hasClass('movie')){
 		 		piece.type = valueObject.attr("rel");	
 		 	//Pak URL
 		 		piece.url = valueObject.find("iframe").attr("src");
 		 		//console.log("video ")+ piece.url;
+		 	piece.position_x = (parseInt(valueObject.css("left"))+parseInt(valueObject.css("padding"))) / valueObject.parent().width();
+            piece.position_y = (parseInt(valueObject.css("top"))+parseInt(valueObject.css("padding"))) / valueObject.parent().innerHeight();
 		 	} 
 		 	else if (valueObject.hasClass('image')){
 		 		piece.type = "image";
@@ -274,10 +281,7 @@ $(function() {
 		 	//Check of lijst
 		 	piece.list = "1";	
 		 	
-		 	//Check x en y positie, breedte en hoogte, normaliseer deze tussen 0 en 1
-		 	var position = valueObject.position();
-		 	piece.position_x = parseInt(valueObject.css("left")) / valueObject.parent().width();
-		 	piece.position_y = parseInt(valueObject.css("top")) / valueObject.parent().innerHeight();
+		 	
 			
 		 	
 		 	piece.width = valueObject.width() / valueObject.parent().width();
